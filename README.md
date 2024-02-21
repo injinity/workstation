@@ -3,7 +3,9 @@ Scripts and instructions for setting up Fedora Silverblue
 
 # Prerequisites
 - Fresh Fedora Silverblue installation
-- Github setup with ssh-key
+[official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer)
+- Github ssh-key setup  
+[instructions](https://github.com/injinity/instructions/blob/main/gtihub_ssh_auth/README.md)
 
 # How to use
 - Clone this repository  
