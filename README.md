@@ -2,8 +2,9 @@
 Scripts and instructions for setting up Fedora Silverblue
 
 # Prerequisites
-- Fresh Fedora Silverblue installation
-[official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer)
+- Fresh Fedora Silverblue installation  
+[official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer)  
+***(make sure to choose `Fedora Silverblue` in the media writer)***
 - Github ssh-key setup  
 [instructions](https://github.com/injinity/instructions/blob/main/gtihub_ssh_auth/README.md)
 
@@ -14,3 +15,5 @@ Scripts and instructions for setting up Fedora Silverblue
 `cd fedora-workstation-setup`
 - Run script  
 `./fedora-workstation-setup.sh`
+- Reboot your system  
+`reboot`
