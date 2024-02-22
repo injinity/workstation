@@ -1,5 +1,16 @@
 #!/bin/bash
 
+IS_NVIDIA_GPU=false
+
+if lspci | grep -i 'nvidia' &> /dev/null; then
+    IS_NVIDIA_GPU=true
+fi
+
+if [ "$IS_NVIDIA_GPU" == true ]; then
+    rpm-ostree install -y akmod-nvidia xorg-x11-drv-nvidia
+    rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+fi
+
 # Install Brave browser and set it as default
 flatpak install -y com.brave.Browser
 xdg-settings set default-web-browser com.brave.Browser.desktop
@@ -33,5 +44,10 @@ flatpak install -y org.signal.Signal
 toolbox create -y
 toolbox run sudo dnf update -y
 toolbox run sudo dnf upgrade -y
+if [ "$IS_NVIDIA_GPU" == true ]; then
+    toolbox run sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia
+fi
 toolbox run sudo dnf install -y wine python3-cairo gnome-terminal vulkan-tools pciutils fluidsynth
 toolbox run sudo dnf install -y lutris
+
+reboot
