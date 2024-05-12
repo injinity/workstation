@@ -14,24 +14,14 @@ Scripts and instructions for setting up Fedora Silverblue
 - Clone this repository  
 `git clone git@github.com:injinity/fedora-workstation-setup.git`
 - Change directory to the cloned repository  
-`cd fedora-workstation-setup`
-
-### If you have an Nvidia gpu
-- Allow the scripts to execute  
-`chmod +x fedora-workstation-setup.sh setup_nvidia.sh setup_nvidia_2.sh setup_nvidia_3.sh setup_nvidia_4.sh`
-- Run scripts in order from `setup_nvidia.sh` to `setup_nvidia_4.sh` **(first 3 will restart your PC)**  
-    - `./setup_nvidia.sh` **(will restart PC)**
-    - `./setup_nvidia_2.sh` **(will restart PC)**
-    - `./setup_nvidia_3.sh` **(will restart PC)**
-    - `./setup_nvidia_4.sh`
-- Finish setup with the default script  
-`./fedora-workstation-setup.sh`
-
-### If you have an AMD gpu
+  `cd fedora-workstation-setup`
 - Allow the script to execute  
   `chmod +x fedora-workstation-setup.sh`
 - Run script  
-`./fedora-workstation-setup.sh`
+  - If you have a nvidia gpu  
+    `./fedora-workstation-setup.sh +nvidia_gpu_drivers`
+  - Else just simply run  
+    `./fedora-workstation-setup.sh`
 
 ## Some of the things this script does
 - Installs nvidia drivers on os-level, flatpak-level and toolbox-level
@@ -43,7 +33,6 @@ Scripts and instructions for setting up Fedora Silverblue
   - Flatseal (for flatpak permission management)
   - Signal (messaging)
   - Intelij Idea CE (Development IDE)
-  - Spotify
   - Steam
   - Lutris (on toolbox)
   - Brave
