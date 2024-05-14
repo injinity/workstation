@@ -1,7 +1,7 @@
 # Install Intelij IDEA CE
 flatpak install -y com.jetbrains.IntelliJ-IDEA-Community
 
-# Neovim setup
+# ============================================ Install Neovim ===========================================================
 flatpak install -y \
   org.freedesktop.Sdk.Extension.rust-stable \
   org.freedesktop.Sdk.Extension.node20 \
@@ -52,3 +52,4 @@ ln -s "$source_dir" "$target_dir"
 echo "alias nvim=\"flatpak run io.neovim.nvim\"" >> "$HOME/.bashrc"
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 
+# ============================================ Install Neovim ===========================================================
