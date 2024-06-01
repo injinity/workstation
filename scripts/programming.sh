@@ -3,6 +3,7 @@ flatpak install -y com.jetbrains.IntelliJ-IDEA-Community
 
 # Set the default git branch to main globally
 git config --global init.defaultBranch main
+git config --global push.autoSetupRemote true
 
 # ============================================ Install Neovim ===========================================================
 flatpak install -y \
