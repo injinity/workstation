@@ -18,6 +18,11 @@ flatpak override \
   --env=FLATPAK_ENABLE_SDK_EXT=rust-stable,node20,openjdk21 \
   io.neovim.nvim
 
+# This is needed for codelldb, there seems to be some kind of security mechanism in place for flatpaks 
+# that prevents any program run from them to attach to a different existing program by default and that just so happen to be how debuggers work ;).
+# In other words.. to be able to use the debugging capabilities of my neovim config we need to assign this permission to the neovim flatpak. 
+flatpak override --user --allow=devel io.neovim.nvim
+
 # Install nerd font to see icons in neovim
 font_directory="$HOME/.local/share/fonts/JetBrainsMono"
 mkdir -p "$font_directory"
