@@ -9,5 +9,5 @@ toolbox run sudo dnf install -y wine python3-cairo gnome-terminal vulkan-tools p
 toolbox run sudo dnf install -y lutris
 
 # Export the lutris launcher so that it can
-./subscripts/toolbox_export.sh lutris
+./scripts/subscripts/toolbox_export.sh lutris
 

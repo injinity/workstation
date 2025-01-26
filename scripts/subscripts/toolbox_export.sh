@@ -11,10 +11,10 @@ fi
 app_name="$1"
 
 # Find the desktop file associated with the application
-desktop_file_to_export=$(find /usr/share/applications -iname "*$app_name*.desktop" 2>/dev/null)
+desktop_file_to_export=$(toolbox run find /usr/share/applications -iname "*$app_name*.desktop" 2>/dev/null)
 
 # Find icons associated with the application
-icons_to_export=$(find /usr/share/icons/hicolor/**/apps -iname "*$app_name*" 2>/dev/null)
+icons_to_export=$(toolbox run find /usr/share/icons/hicolor/**/apps -iname "*$app_name*" 2>/dev/null)
 
 # Check if any desktop files were found
 if [ -z "$desktop_file_to_export" ]; then
@@ -24,16 +24,18 @@ else
   toolbox run mkdir -pv ~/.local/share/applications/
   toolbox run cp -v "$desktop_file_to_export" ~/.local/share/applications/
 
+  relative_path="${desktop_file_to_export#/usr/share/applications/}"
+  
   # Path to the .desktop file
-  DESKTOP_FILE="$HOME/.local/share/applications/lutris.desktop"
+  desktop_file="$HOME/.local/share/applications/$relative_path"
 
   # New Exec command
-  NEW_EXEC="Exec=toolbox run lutris %U"
+  new_exec="Exec=toolbox run lutris %U"
 
   # Use sed to replace the Exec line
-  toolbox run sed -i "s|^Exec=.*|$NEW_EXEC|" "$DESKTOP_FILE"
+  toolbox run sed -i "s|^Exec=.*|$new_exec|" "$desktop_file"
 
-  echo "Updated Exec line in $DESKTOP_FILE"
+  echo -e "Updated Exec line in $desktop_file\n"
 fi
 
 # Check if any icons were found
