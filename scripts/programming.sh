@@ -21,7 +21,18 @@ flatpak override \
 # This is needed for codelldb, there seems to be some kind of security mechanism in place for flatpaks 
 # that prevents any program run from them to attach to a different existing program by default and that just so happen to be how debuggers work ;).
 # In other words.. to be able to use the debugging capabilities of my neovim config we need to assign this permission to the neovim flatpak. 
-flatpak override --user --allow=devel io.neovim.nvim
+flatpak override \
+  --user \
+  --allow=devel \
+  io.neovim.nvim
+
+# This is needed to use podman on the host system from within the flatpak environment
+# without it when running `flatpak-spawn --host podman` this error will be returned:
+# "Portal call failed: org.freedesktop.DBus.Error.ServiceUnknown"
+flatpak override \
+  --user \
+  --talk-name=org.freedesktop.Flatpak \
+  io.neovim.nvim
 
 # Install nerd font to see icons in neovim
 font_directory="$HOME/.local/share/fonts/JetBrainsMono"
@@ -59,6 +70,7 @@ mkdir -p "$(dirname "$target_dir")"
 ln -s "$source_dir" "$target_dir"
 
 echo "alias nvim=\"flatpak run io.neovim.nvim\"" >> "$HOME/.bashrc"
-git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
-
+git clone https://github.com/NvChad/starter ~/.var/app/io.neovim.nvim/config/nvim && flatpak run io.neovim.nvim
+rm -rf .git
 # ============================================ Install Neovim ===========================================================
+

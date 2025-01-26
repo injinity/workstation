@@ -132,3 +132,4 @@ case $stage in
 esac
 
 ) > "$script_base_dir/nvidia_gpu.log" 2>&1  # this is used for log redirection
+
