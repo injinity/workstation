@@ -23,6 +23,17 @@ else
   echo -e "Exporting desktop file:\n$desktop_file_to_export\n"
   mkdir -pv ~/.local/share/applications/
   cp -v "$desktop_file_to_export" ~/.local/share/applications/
+
+  # Path to the .desktop file
+  DESKTOP_FILE="$HOME/.local/share/applications/lutris.desktop"
+
+  # New Exec command
+  NEW_EXEC="Exec=toolbox run lutris %U"
+
+  # Use sed to replace the Exec line
+  sed -i "s|^Exec=.*|$NEW_EXEC|" "$DESKTOP_FILE"
+
+  echo "Updated Exec line in $DESKTOP_FILE"
 fi
 
 # Check if any icons were found
