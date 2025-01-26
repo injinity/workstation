@@ -21,8 +21,8 @@ if [ -z "$desktop_file_to_export" ]; then
   echo "No desktop file found for application: $app_name"
 else
   echo -e "Exporting desktop file:\n$desktop_file_to_export\n"
-  mkdir -pv ~/.local/share/applications/
-  cp -v "$desktop_file_to_export" ~/.local/share/applications/
+  toolbox run mkdir -pv ~/.local/share/applications/
+  toolbox run cp -v "$desktop_file_to_export" ~/.local/share/applications/
 
   # Path to the .desktop file
   DESKTOP_FILE="$HOME/.local/share/applications/lutris.desktop"
@@ -31,7 +31,7 @@ else
   NEW_EXEC="Exec=toolbox run lutris %U"
 
   # Use sed to replace the Exec line
-  sed -i "s|^Exec=.*|$NEW_EXEC|" "$DESKTOP_FILE"
+  toolbox run sed -i "s|^Exec=.*|$NEW_EXEC|" "$DESKTOP_FILE"
 
   echo "Updated Exec line in $DESKTOP_FILE"
 fi
@@ -43,7 +43,7 @@ else
   echo -e "Exporting icons:\n$icons_to_export\n"
   
   # Create necessary base directory in ~/.local/share/icons if it doesn't exist
-  mkdir -pv ~/.local/share/icons/hicolor
+  toolbox run mkdir -pv ~/.local/share/icons/hicolor
   
   # Copy icons while preserving their directory structure
   for icon in $icons_to_export; do
@@ -51,9 +51,9 @@ else
     relative_path="${icon#/usr/share/icons/hicolor/}"
     # Create the target directory in ~/.local/share/icons
     target_dir="$(dirname "$relative_path")"
-    mkdir -pv "$HOME/.local/share/icons/hicolor/$target_dir"
+    toolbox run mkdir -pv "$HOME/.local/share/icons/hicolor/$target_dir"
     # Copy the icon to the new location
-    cp -v "$icon" "$HOME/.local/share/icons/hicolor/$target_dir/"
+    toolbox run cp -v "$icon" "$HOME/.local/share/icons/hicolor/$target_dir/"
   done
 fi
 

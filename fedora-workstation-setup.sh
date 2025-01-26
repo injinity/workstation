@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo chmod +x scripts/*
+sudo chmod +x scripts/*.sh scripts/subscripts/*.sh
 
 ./scripts/browser.sh
 ./scripts/general.sh
