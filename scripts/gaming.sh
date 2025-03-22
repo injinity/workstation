@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# Loop through all arguments
+for arg in "$@"; do
+    if [[ "$arg" == "--no-gaming" ]]; then
+        echo "Option --no-gaming detected, skipping gaming setup."
+        exit 0
+    fi
+done
+
 # Install Steam
 flatpak install -y com.valvesoftware.Steam
 

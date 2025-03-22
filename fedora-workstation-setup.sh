@@ -7,6 +7,11 @@ sudo chmod +x scripts/*.sh scripts/subscripts/*.sh
 ./scripts/programming.sh
 ./scripts/gaming.sh
 
-if [ "$1" = "+nvidia_gpu_driers" ]; then
-  ./scripts/nvidia_gpu_driers.sh
-fi
+# Loop through all arguments
+for arg in "$@"; do
+    if [[ "$arg" == "--no-programming" ]]; then
+        echo "Option --nvidia detected, installing nvidia gpu drivers."
+        ./scripts/nvidia_gpu_driers.sh
+    fi
+done
+

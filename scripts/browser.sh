@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# Loop through all arguments
+for arg in "$@"; do
+    if [[ "$arg" == "--no-browser" ]]; then
+        echo "Option --no-browser detected, skipping browser setup."
+        exit 0
+    fi
+done
+
 # Install Brave browser and set it as default
 flatpak install -y com.brave.Browser
 xdg-settings set default-web-browser com.brave.Browser.desktop

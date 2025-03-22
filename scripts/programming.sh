@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Loop through all arguments
+for arg in "$@"; do
+    if [[ "$arg" == "--no-programming" ]]; then
+        echo "Option --no-programming detected, skipping programming setup."
+        exit 0
+    fi
+done
+
 # Install Intelij IDEA CE
 flatpak install -y com.jetbrains.IntelliJ-IDEA-Community
 

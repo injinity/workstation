@@ -30,7 +30,7 @@ else
   desktop_file="$HOME/.local/share/applications/$relative_path"
 
   # New Exec command
-  new_exec="Exec=toolbox run lutris %U"
+  new_exec="toolbox run $(cat $desktop_file | grep 'Exec=')"
 
   # Use sed to replace the Exec line
   toolbox run sed -i "s|^Exec=.*|$new_exec|" "$desktop_file"
