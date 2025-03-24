@@ -1,33 +1,35 @@
-# Fedora Workstation Setup
-Scripts and instructions for setting up Fedora Silverblue
+# Workstation
+Scripts and instructions for setting up your workstation 
+
+## Contents
+TODO
 
 ## Prerequisites
-
 - Fresh Fedora Silverblue installation  
 [official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer)  
 ***(make sure to choose `Fedora Silverblue` in the media writer)***
 - GitHub ssh-key setup  
 [instructions](https://github.com/injinity/instructions/blob/main/gtihub_ssh_auth/README.md)
 
-## How to use
+## Usage
 
 Clone this repository  
 ```
-git clone git@github.com:injinity/fedora-workstation-setup.git
+git clone git@github.com:injinity/workstation.git
 ```
 Change directory to the cloned repository  
 ```
-cd fedora-workstation-setup
+cd workstation/
 ```
 Allow the script to execute  
 ```
-chmod +x fedora-workstation-setup.sh
+chmod +x install.sh
 ```
 Run script  
   - If you have a nvidia gpu  
-    `./fedora-workstation-setup.sh --nvidia`
+    `./install.sh --nvidia`
   - Else just simply run  
-    `./fedora-workstation-setup.sh`
+    `./install.sh`
 
 ## Options
 More fined grained controll may come in the future.
@@ -91,6 +93,7 @@ __Content__
 - Install flux CLI in the toolbox
 - Set up flux CLI command autocompletion
 
-## There is a problem with this script, or I want it to do more
-In this case feel free to just open an issue in this repo on GitHub 
+## Contributing
+Feel free to just open an issue in this repo on GitHub 
 or just create a pull request with the changes to the script you want to see.
+
