@@ -8,43 +8,37 @@ for arg in "$@"; do
     fi
 done
 
-toolbox run sudo dnf install kubectl
+echo "Setting up the system for using the Injinity platform.."
 
-# Add autocompletion for kubectl CLI
-# https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion
-toolbox run echo 'source <(kubectl completion bash)' >> ~/.bashrc
+toolbox run -c injinity sudo dnf install -y kubectl
 
 # Install flux CLI
 # https://fluxcd.io/flux/cmd/#install-using-bash
-toolbox run sudo curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION=2.0.0 bash
-
-# Add autocompletion for flux CLI
-# https://fluxcd.io/flux/cmd/flux_completion_bash/#examples
-# ~/.bashrc or ~/.profile
-toolbox run echo "command -v flux >/dev/null && . <(flux completion bash)" | sudo tee -a ~/.bashrc
+toolbox run -c injinity sudo curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION=2.0.0 bash
 
 # Set a local domain "master-node-0" and point it to the ip of the VPS
-echo "62.169.17.115\tmaster-node-0" | sudo tee -a /etc/hosts
+echo -e "62.169.17.115\tmaster-node-0" | sudo tee -a /etc/hosts
 
-sudo cp ../configs/0-ssh_config.conf /etc/ssh/ssh_config.d/
-
-# Ssh tunnel to the master-node-0
-echo "ssh -fNL 6443:127.0.0.1:6443 dev@master-node-0" >> ~/.bashrc
+sudo cp configs/0-ssh_config.conf /etc/ssh/ssh_config.d/0-ssh_config.conf
+sudo systemctl restart sshd
 
 # Download the KUBECONFIG from server
-toolbox run scp dev@master-node-0:~/.kube/config .kube/config
+toolbox run -c injinity mkdir -p ~/.kube
+toolbox run -c injinity scp dev@master-node-0:~/.kube/config ~/.kube/config
 
-# Create connection script and store it in the ~/Nodes dir
+# Copy connections scripts to ~/Nodes dir
 mkdir -p ~/Nodes
-touch ~/Nodes/dev@master-node-0.sh
-echo -e '#!/bin/bash\n\nssh dev@master-node-0' > ~/Nodes/dev@master-node-0.sh
-chmod +x ~/Nodes/dev@master-node-0.sh
 
-touch ~/Nodes/admin@master-node-0.sh
-echo -e '#!/bin/bash\n\nssh admin@master-node-0' > ~/Nodes/admin@master-node-0.sh
+cp configs/admin@master-node-0.sh ~/Nodes/admin@master-node-0.sh
 chmod +x ~/Nodes/admin@master-node-0.sh
 
-CERT_AUTHORITY=$(cat ../configs/known_hosts)
+cp configs/dev@master-node-0.sh ~/Nodes/dev@master-node-0.sh
+chmod +x ~/Nodes/dev@master-node-0.sh
 
-sed -i "/@cert-authority master-node-0/c\\$CERT_AUTHORITY" ~/.ssh/known_hosts
+# Add Injinity VPSs to known_hosts
+mkdir -p ~/.ssh/known_hosts.d
+cp configs/injinity_hosts ~/.ssh/known_hosts.d/injinity_hosts
+
+mkdir -p ~/.bashrc.d
+cp configs/workstation-bashrc ~/.bashrc.d/workstation-bashrc
 

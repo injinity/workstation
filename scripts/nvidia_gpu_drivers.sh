@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Setting up the NVIDIA GPU drivers.."
+
 set -e  # Exit immediately if any command exits with a non-zero status
 
 script_base_dir=$(dirname "$(readlink -f "$0")")
@@ -16,14 +18,14 @@ stage_1() {
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
     || { echo "Failed to install RPM Fusion repos"; exit 1; }
 
-  toolbox run sudo dnf install -y \
+  toolbox run -c injinity sudo dnf install -y \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
     || { echo "Failed to install RPM Fusion repos in toolbox"; exit 1; }
 
-  toolbox run sudo dnf update -y \
+  toolbox run -c injinity sudo dnf update -y \
     || { echo "Failed to update packages in toolbox"; exit 1; }
-  toolbox run sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda \
+  toolbox run -c injinity sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda \
     || { echo "Failed to install NVIDIA drivers in toolbox"; exit 1; }
 }
 

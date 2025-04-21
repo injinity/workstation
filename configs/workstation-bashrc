@@ -1,0 +1,17 @@
+# Ssh tunnel to the master-node-0
+ssh -fNL 6443:127.0.0.1:6443 dev@master-node-0
+
+# ========== should only excecute in the toolbox ================
+if [ -f /run/.containerenv ] \
+   && [ -f /run/.toolboxenv ]; then
+
+  # Add autocompletion for kubectl CLI
+  # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion
+  source <(kubectl completion bash)
+
+  # Add autocompletion for flux CLI
+  # https://fluxcd.io/flux/cmd/flux_completion_bash/#examples
+  # ~/.bashrc or ~/.profile
+  command -v flux >/dev/null && . <(flux completion bash)
+fi
+
