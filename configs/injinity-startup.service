@@ -1,0 +1,11 @@
+[Unit]
+Description=Execute Injinity startup tasks
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/injinity-startup-script.sh
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,12 @@
+[Unit]
+Description=SSH tunne to injinity VPS for remote kubectl use.
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ssh -fNL 6443:127.0.0.1:6443 dev@master-node-0
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+

@@ -1,9 +1,4 @@
-# Ssh tunnel to the master-node-0
-if ! lsof -i :6443 > /dev/null 2>&1; then
-    ssh -fNL 6443:127.0.0.1:6443 dev@master-node-0
-fi
-
-# ========== should only excecute in the toolbox ================
+# ========== should only excecute when in the toolbox ================
 if [ -f /run/.containerenv ] \
    && [ -f /run/.toolboxenv ]; then
 
