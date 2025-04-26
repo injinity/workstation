@@ -13,7 +13,7 @@ echo "Setting up the system for using the Injinity platform.."
 # ======================= System Config ======================= START 
 
 mkdir -p ~/.bashrc.d
-cp configs/workstation-bashrc ~/.bashrc.d/workstation-bashrc
+cp configs/bashrc ~/.bashrc.d/injinity-bashrc
 
 # ======================= System Config ======================= END
 
@@ -33,14 +33,14 @@ toolbox run -c injinity mkdir -p ~/.kube
 # ======================= SSH Config ======================= START 
 
 # Set a local domain "master-node-0" and point it to the ip of the VPS
-echo -e "62.169.17.115\tmaster-node-0" | sudo tee -a /etc/hosts
+sudo ./scripts/subscripts/update_hosts.sh
 
-sudo cp configs/0-ssh_config.conf /etc/ssh/ssh_config.d/0-ssh_config.conf
+sudo cp configs/ssh_config.conf /etc/ssh/ssh_config.d/0-injinity.conf
 sudo systemctl restart sshd
 
 # Add Injinity VPSs to known_hosts
 mkdir -p ~/.ssh/known_hosts.d
-cp configs/injinity_hosts ~/.ssh/known_hosts.d/injinity_hosts
+cp configs/known_hosts ~/.ssh/known_hosts.d/injinity_known_hosts
 
 # Copy connections scripts to ~/Nodes dir
 mkdir -p ~/Nodes
@@ -59,15 +59,15 @@ chmod +x ~/Nodes/dev@master-node-0.sh
 mkdir -p ~/.config/systemd/user/
 
 # Script executed on startup by `injinity-startup.service`
-cp configs/injinity-startup-script.sh ~/.local/bin/injinity-startup-script.sh
+cp configs/startup-script.sh ~/.local/bin/injinity-startup-script.sh
 chmod +x ~/.local/bin/injinity-startup-script.sh
 
 # Oneshot Service executed once after system startup
-cp configs/injinity-startup.service ~/.config/systemd/user/injinity-startup.service
+cp configs/startup.service ~/.config/systemd/user/injinity-startup.service
 systemctl --user enable --now injinity-startup.service
 
 # Open SSH tunnel to Injinity VPS for remote kubectl use
-cp configs/injinity-ssh-tunnel.service ~/.config/systemd/user/injinity-ssh-tunnel.service
+cp configs/ssh-tunnel.service ~/.config/systemd/user/injinity-ssh-tunnel.service
 systemctl --user enable --now injinity-ssh-tunnel.service
 
 # ======================= Systemd services ======================= END

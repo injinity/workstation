@@ -1,0 +1,16 @@
+[Unit]
+Description=SSH tunnel for kubectl to master-node-0
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -NT -o ExitOnForwardFailure=yes \
+    -L 6443:127.0.0.1:6443 dev@master-node-0
+ExecStop=/usr/bin/ssh -O exit dev@master-node-0
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
