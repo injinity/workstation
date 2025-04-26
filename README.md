@@ -91,7 +91,11 @@ Sets up the system for work with the Injinity platform
 __Content__
 - Install kubectl in the toolbox
 - Install flux CLI in the toolbox
-- Set up flux CLI command autocompletion
+- Set up flux CLI command autocompletion in the toolbox
+- Set up kubectl CLI command autocompletion in the toolbox
+- Set up remote kubectl and flux connection to kube cluster
+- Set up local Injinity VPS host domains like 'master-node-0'
+- Add VPS connection scripts to ~/Nodes folder
 
 ## Contributing
 Feel free to just open an issue in this repo on GitHub 
