@@ -28,15 +28,17 @@ chmod +x install.sh
 Run script  
   - If you have a nvidia gpu  
     `./install.sh --nvidia`
+  - If you run on wsl2
+    `./install.sh --no-gaming --no-neovim --no-browser`
   - Else just simply run  
     `./install.sh`
 
 ## Options
 More fined grained controll may come in the future.
 
-### General
+### Common
 General apps and changes to the os.
-To not apply those changes use the `--no-general` option on the install script.
+To not apply those changes use the `--no-common` option on the install script.
 
 __Content__
 - scroll wheel direction set to "natural"
@@ -60,9 +62,6 @@ __Content__
 - Install Intelij Idea IDE flatpak
 - Configure git (version controll)
     - Set the default branch name to main
-- Install flatpak runtimes for rust java and web development
-- Install NerdFonts (fonts supporting emojis) to the terminal 
-- Install Neovim (Text Editor/IDE)
 
 ### Gaming
 Sets up the os for gaming.
@@ -87,6 +86,7 @@ __Content__
 
 ### Injinity
 Sets up the system for work with the Injinity platform
+To not apply those changes use the `--no-injinity` option on the install script.
 
 __Content__
 - Install kubectl in the toolbox
@@ -96,6 +96,16 @@ __Content__
 - Set up remote kubectl and flux connection to kube cluster
 - Set up local Injinity VPS host domains like 'master-node-0'
 - Add VPS connection scripts to ~/Nodes folder
+
+### Neovim
+Sets up a inhouse neovim config
+To not apply those changes use the `--no-neovim` option on the install script.
+
+__Content__
+- Install flatpak runtimes for rust java and web development
+- Install NerdFonts (fonts supporting emojis) to the terminal 
+- Install Neovim (Text Editor/IDE)
+- Install custom neovim config
 
 ## Contributing
 Feel free to just open an issue in this repo on GitHub 
