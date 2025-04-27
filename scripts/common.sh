@@ -13,6 +13,15 @@ flatpak install -y org.signal.Signal
 
 # ============= Setting up toolbox =================
 
+. /etc/os-release
+
+if [[ $ID == fedora && ${VARIANT_ID:-} != silverblue ]]; then
+    echo "Script mode: Fedora."
+    sudo dnf install toolbox -y
+else
+    echo "Script mode: Fedora Silverblue."
+fi
+
 # Get the host Fedora version
 host_version=$(rpm -E %fedora)
 echo "Host Fedora version: $host_version"

@@ -24,6 +24,13 @@ done
 
 echo "All options are valid."
 
+. /etc/os-release
+
+if [[ $ID != fedora ]]; then
+    echo "Not a Fedora OS terminating script."
+    exit 1
+fi
+
 echo "Installing the workstation setup.."
 
 sudo chmod +x scripts/*.sh scripts/subscripts/*.sh
