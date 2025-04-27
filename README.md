@@ -5,9 +5,11 @@ Scripts and instructions for setting up your workstation
 TODO
 
 ## Prerequisites
-- Fresh Fedora Silverblue installation  
-[official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer)  
+- Fresh Fedora Silverblue or Windows WSL Fedora installation
+[official guide](https://docs.fedoraproject.org/en-US/fedora/latest/preparing-boot-media/#_fedora_media_writer) (Fedora Silverblue)
 ***(make sure to choose `Fedora Silverblue` in the media writer)***
+[WSL guide](https://github.com/injinity/instructions/blob/main/windows_wsl_fedora/README.md) (Windows WSL)
+
 - GitHub ssh-key setup  
 [instructions](https://github.com/injinity/instructions/blob/main/gtihub_ssh_auth/README.md)
 
