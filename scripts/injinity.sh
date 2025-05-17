@@ -12,8 +12,15 @@ echo "Setting up the system for using the Injinity platform.."
 
 # ======================= System Config ======================= START 
 
+# Set scripts that are executed on terminal session startup
 mkdir -p ~/.bashrc.d
-cp configs/bashrc ~/.bashrc.d/injinity-bashrc
+# Here are put scripts that should only be run on the host session
+cp configs/.bashrc ~/.bashrc.d/injinity-bashrc
+# Here can also be put scripts that should be run on the host and toolbox
+cp configs/.bash_profile ~/.bash_profile
+
+# Download the KUBECONFIG from server
+toolbox run -c injinity mkdir -p ~/.kube
 
 # ======================= System Config ======================= END
 
@@ -25,8 +32,9 @@ toolbox run -c injinity sudo dnf install -y kubectl envsubst
 # https://fluxcd.io/flux/cmd/#install-using-bash
 toolbox run -c injinity sudo curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION=2.0.0 bash
 
-# Download the KUBECONFIG from server
-toolbox run -c injinity mkdir -p ~/.kube
+# Install kustomize CLI
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+mv kustomize ~/.local/bin/kustomize
 
 # ======================= CLI applications ======================= END
 

@@ -10,5 +10,7 @@ if [ -f /run/.containerenv ] \
   # https://fluxcd.io/flux/cmd/flux_completion_bash/#examples
   # ~/.bashrc or ~/.profile
   command -v flux >/dev/null && . <(flux completion bash)
+
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
